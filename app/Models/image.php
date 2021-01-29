@@ -11,7 +11,7 @@ class image extends Model
 
     //relacion plomorfica//
 
-    /*public function imagiable(){
+    public function imagiable(){
         return $this->morphTo();
-    }*/
+    }
 }

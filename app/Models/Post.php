@@ -23,7 +23,7 @@ class Post extends Model
         return $this->belongsToMany(Tag::class);
     }
 
-    /*public function images(){
+    public function images(){
         return $this->morphOne(image::class,'imagiable');
-    }*/
+    }
 }
