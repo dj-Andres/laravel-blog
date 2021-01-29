@@ -1,4 +1,8 @@
-<!DOCTYPE html>
+<!---Forma de llamar a un componente--->
+<x-app-layout>
+</x-app-layout>
+<!---Forma de llamar a un componente--->
+{{-- <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
         <meta charset="utf-8">
@@ -130,3 +134,4 @@
         </div>
     </body>
 </html>
+ --}}
