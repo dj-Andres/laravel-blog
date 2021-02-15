@@ -9,7 +9,7 @@
 @section('content')
     <div class="card">
         <div class="card-body">
-            {!! Form::open(['route'=>'admin.posts.store','autocomplete'=>'off']) !!}
+            {!! Form::open(['route'=>'admin.posts.store','autocomplete'=>'off','files'=> true]) !!}
 
             {!! Form::hidden('user_id', auth()->user()->id) !!}
 
@@ -87,6 +87,25 @@
                 @enderror
             </div>
 
+            <div class="row mb-3">
+                <div class="col">
+                    <div class="image-wrapper">
+                        <img id="picture" src="https://cdn.pixabay.com/photo/2016/03/27/18/54/technology-1283624_960_720.jpg" alt="" srcset="">
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group">
+                        {!! Form::label('file', 'Imagen de muestra en caso que de que no suba una !') !!}
+                        {!! Form::file('file', ['class'=>'form-control-file','accept'=>'image/*']) !!}
+
+                        @error('file')
+                        <span class="text-danger">{{ $message }}</span>
+                        @enderror
+                        
+                    </div>
+                </div>
+            </div>
+
             <div class="form-group">
                 {!! Form::label('extract', 'Extracto') !!}
                 {!! Form::textarea('extract', null, ['class'=>'form-control']) !!}
@@ -116,6 +135,23 @@
     </div>    
 @stop
 
+@section('css')
+    <style>
+        .image-wrapper{
+            position: relative;
+            padding-bottom: 56.25%;
+        }
+        .image-wrapper img{
+            border-radius: 7px;
+            border: 2px solid blueviolet;
+            position: absolute;
+            object-fit: cover;
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+@stop
+
 @section('js')
     <script src="{{ asset('vendor/jQuery-Plugin-stringToSlug-1.3/jquery.stringToSlug.min.js') }}"></script>
     <script src="https://cdn.ckeditor.com/ckeditor5/25.0.0/classic/ckeditor.js"></script>
@@ -131,6 +167,22 @@
             .catch( error => {
                 console.error( error );
             } );    
+
+        const file = document.getElementById('file');
+        const image = document.getElementById('picture');
+        
+        file.addEventListener('change',changeImage);
+
+        function changeImage(event){
+            let file = event.target.files[0];
+            let reader = new FileReader();
+
+            reader.onload=(event)=>{
+                image.setAttribute('src', event.target.result);
+            };
+
+            reader.readAsDataURL(file);
+        }
     </script>
     <script>
         $(document).ready(function(){

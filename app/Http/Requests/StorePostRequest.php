@@ -31,7 +31,8 @@ class StorePostRequest extends FormRequest
         $rules=[
             'nombre'=>'required',
             'slug'=>'required|unique:posts',
-            'status'=>'required|in:0,1'
+            'status'=>'required|in:0,1',
+            'file'=> 'image'
         ];
 
         if($this->status == 1){
