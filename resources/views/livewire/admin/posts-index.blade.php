@@ -22,9 +22,9 @@
                             <a class="btn btn-warning" href="{{ route('admin.posts.edit',$post)}}">Editar</a>
                         </td>
                         <td widt="10px">
-                            <form action="" method="POST">
-                                @method('delete')
+                            <form action="{{ route('admin.posts.destroy',$post)}}" method="POST">
                                 @csrf
+                                @method('DELETE')
                                 <button class="btn btn-danger" type="submit">Eliminar</button>
                             </form>
                         </td>

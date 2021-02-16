@@ -7,6 +7,12 @@
 @stop
 
 @section('content')
+    @if (session('info'))
+    <div class="alert alert-success mt-2" role="alert">
+        <span><i class="fas fa-check m-1"></i>{{ session('info') }}</span>
+    </div>
+    @endif
+
     @livewire('admin.posts-index')
 @stop
 
