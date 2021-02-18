@@ -78,6 +78,8 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
+        $this->authorize('author',$post);
+
         $categories=Category::pluck('nombre','id');
 
         $tags=Tag::all();
@@ -94,6 +96,8 @@ class PostController extends Controller
      */
     public function update(PostRequest $request, Post $post)
     {
+        $this->authorize('author',$post);
+
         $post->update($request->all());
 
         if ($request->file('file')) {
@@ -130,6 +134,8 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
+        $this->authorize('author',$post);
+        
         $post->delete();
 
         return redirect()->route('admin.posts.index',$post)->with('info','El post elimino  exitosamente');
