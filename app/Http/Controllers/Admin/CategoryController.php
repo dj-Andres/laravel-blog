@@ -12,6 +12,14 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct()
+    {
+        $this->middleware('can:admin.categories.index')->only('index');
+        $this->middleware('can:admin.categories.create')->only('create','store');
+        $this->middleware('can:admin.categories.edit')->only('edit','update');
+        $this->middleware('can:admin.categories.destroy')->only('destroy');
+    }
+
     public function index()
     {
         $categories =Category::all();
@@ -46,19 +54,6 @@ class CategoryController extends Controller
 
         return redirect()->route('admin.categories.edit',$category)->with('info','La guardo la categoria de manera exitosa');
     }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $category
-     
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Category $category)
-    {
-        return view('admin.categories.show',compact('category'));
-    }
-
     /**
      * Show the form for editing the specified resource.
      *
