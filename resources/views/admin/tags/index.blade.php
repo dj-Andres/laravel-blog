@@ -14,7 +14,9 @@
     @endif
     <div class="card">
         <div class="card-header">
-            <a href="{{ route('admin.tags.create') }}" class="btn btn-outline-primary">Nueva Etiqueta</a>
+            @can('admin.tags.create')
+                <a href="{{ route('admin.tags.create') }}" class="btn btn-outline-success">Nueva Etiqueta</a>
+            @endcan
         </div>
         <div class="card-body">
             <table class="table table-striped">
@@ -31,14 +33,18 @@
                             <td>{{ $tag->id }}</td>
                             <td>{{ $tag->nombre }}</td>
                             <td width="10px">
-                                <a href="{{ route('admin.tags.edit', $tag) }}" class="btn btn-warning" title="Modificar"><i class="fas fa-pencil-alt"></i></a>
+                                @can('admin.tags.edit')
+                                    <a href="{{ route('admin.tags.edit', $tag) }}" class="btn btn-warning" title="Modificar"><i class="fas fa-pencil-alt"></i></a>
+                                @endcan
                             </td>
                             <td width="10px">
-                                <form action="{{ route('admin.tags.destroy', $tag) }}" method="POST">
-                                    @csrf
-                                    @method('delete')
-                                    <button class="btn btn-danger" title="Eliminar" type="submit"><i class="fas fa-trash-alt"></i></button>
-                                </form>
+                                @can('admin.tags.destroy')
+                                    <form action="{{ route('admin.tags.destroy', $tag) }}" method="POST">
+                                        @csrf
+                                        @method('delete')
+                                        <button class="btn btn-danger" title="Eliminar" type="submit"><i class="fas fa-trash-alt"></i></button>
+                                    </form>
+                                @endcan
                             </td>
                         </tr>
                     @endforeach

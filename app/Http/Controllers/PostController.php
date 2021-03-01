@@ -9,12 +9,14 @@ use Illuminate\Http\Request;
 class PostController extends Controller
 {
     public function index(){
-        $posts= Post::where('status',1)->latest('id')->paginate(5);
+        $posts= Post::where('status',1)->latest('id')->paginate(8);
 
         return view('posts.index',compact('posts'));
     }
 
     public function show(Post $post){
+
+        $this->authorize('publiship',$post);
 
         $similares=Post::where('category_id',$post->category_id)
 
@@ -31,7 +33,7 @@ class PostController extends Controller
         $posts=Post::where('category_id',$categoria->id)
                     ->where('status',1)
                     ->latest('id')
-                    ->paginate(2);
+                    ->paginate(6);
 
         return view('posts.category',compact('posts','categoria'));
     }

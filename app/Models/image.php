@@ -11,6 +11,8 @@ class image extends Model
 
     //relacion plomorfica//
 
+    protected $fillable=['url'];
+
     public function imagiable(){
         return $this->morphTo();
     }

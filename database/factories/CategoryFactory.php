@@ -21,8 +21,8 @@ class CategoryFactory extends Factory
      */
     public function definition()
     {
-        $nombre=$this->faker->uniqid()->word(20);
-
+        //$nombre=$this->faker->uniqid()->word(20);
+        $nombre=$this->faker->unique()->word(20);
         return [
             'nombre'=>$nombre,
             'slug'=>Str::slug($nombre)
