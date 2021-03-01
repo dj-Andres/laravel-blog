@@ -24,14 +24,15 @@ class PostFactory extends Factory
     public function definition()
     {
 
+        
         $nombre=$this->faker->unique()->sentence();
 
         return [
             'nombre'=>$nombre,
             'slug'=>Str::slug($nombre),
             'extract'=>$this->faker->text(120),
-            'body'=>$this->faker->text(400),
-            'status'=>$this->faker->randomElements([1,2]),
+            'body'=>$this->faker->text(2000),
+            'status'=>$this->faker->randomElement([1, 0]),
             'user_id'=> User::all()->random()->id,
             'category_id'=> Category::all()->random()->id
         ];

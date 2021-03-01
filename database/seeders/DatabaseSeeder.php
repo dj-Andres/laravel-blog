@@ -7,6 +7,9 @@ use App\Models\Post;
 use App\Models\Tag;
 use Illuminate\Database\Seeder;
 
+use Illuminate\Support\Facades\Storage;
+
+
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -16,6 +19,9 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+
+        Storage::makeDirectory('posts');
+
         $this->call(RolSeeder::class);
          //\App\Models\User::factory(10)->create();
          $this->call(UserSeeder::class);
