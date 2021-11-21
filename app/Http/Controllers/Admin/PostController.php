@@ -91,7 +91,7 @@ class PostController extends Controller
             $url = Storage::put('posts',$request->file('file'));
 
             if ($post->image) {
-                
+
                 Storage::delete($post->images->url);
 
                 $post->image->update([
@@ -121,9 +121,9 @@ class PostController extends Controller
     public function destroy(Post $post)
     {
         $this->authorize('author',$post);
-        
+
         $post->delete();
 
-        return redirect()->route('admin.posts.index',$post)->with('info','El post elimino  exitosamente');
+        return redirect()->route('admin.posts.index',$post)->with('info','El post elimino de manera correcta  exitosamente');
     }
 }
